@@ -17,6 +17,7 @@ QSqlTableModel * Prestations::model(QWidget *parent, BaseDeDonnees *baseDeDonnee
     tableModel->setHeaderData(3, Qt::Horizontal, "Description");
     tableModel->setHeaderData(4, Qt::Horizontal, "Prix unitaire");
     return tableModel;
+
 }
 
 int Prestations::nbr()
@@ -90,4 +91,21 @@ bool Prestations::supprimer(const int rowId)
        tableModel->database().rollback();
         return false;
     }
+}
+
+bool Prestations::filtreCat(const int catId)
+{
+    if(catId == 0)
+    {
+        tableModel->setFilter("presta_cat != -1");
+    }
+    else
+    {
+      tableModel->setFilter(QString("presta_cat = %0").arg(catId));
+    }
+    if(tableModel->submitAll())
+    {
+        return true;
+    }
+    return false;
 }

@@ -17,6 +17,7 @@ public:
     int nbr();
     QString getDonnees(const int rowId, const int valueId);
     bool supprimer(const int rowId);
+    bool filtreCat(const int catId);
 
 private:
     BaseDeDonnees *baseDeDonnees;

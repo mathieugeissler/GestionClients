@@ -16,3 +16,8 @@ QSqlTableModel * PrestationsCategories::model(QWidget *parent, BaseDeDonnees *ba
     tableModel->setHeaderData(2, Qt::Horizontal, "Déscription");
     return tableModel;
 }
+
+QString PrestationsCategories::getDonnee(const int rowId, const int valueId)
+{
+    return tableModel->record(rowId).value(valueId).toString();
+}

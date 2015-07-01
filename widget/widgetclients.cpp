@@ -42,10 +42,28 @@ void WidgetClients::creerActions()
 void WidgetClients::creerToolBar()
 {
     toolBar = new QToolBar;
+
+    QLabel *civilite = new QLabel("Civilité : ");
+    cbbCivilites = new QComboBox;
+
+    toolBar->addWidget(civilite);
+    toolBar->addWidget(cbbCivilites);
+    toolBar->addSeparator();
     toolBar->addAction(actionAjouterClient);
     toolBar->addAction(actionEditerClient);
     toolBar->addAction(actionSupprClient);
 }
+
+void WidgetClients::creerCivilites()
+{
+    clientsCivilites = new ClientsCivilites;
+    cbbCivilites->setModel(clientsCivilites->model(this, baseDeDonnees));
+    cbbCivilites->setModelColumn(1);
+    cbbCivilites->setCurrentIndex(0);
+
+    connect(cbbCivilites, SIGNAL(currentIndexChanged(int)), this, SLOT(clientsCivChange(int)));
+}
+
 void WidgetClients::creerTableau()
 {
     tableau = new QTreeView;
@@ -86,5 +104,12 @@ void WidgetClients::supprClient()
     {
         return;
     }
+}
+
+void WidgetClients::clientsCivChange(int indexId)
+{
+    //clients->filtreCat(prestaCategories->getDonnee(indexId, 0).toInt());
+    //viderFormulaire();
+    //desactiverForm(true);
 }
 

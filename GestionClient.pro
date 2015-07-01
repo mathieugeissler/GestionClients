@@ -9,7 +9,8 @@ SOURCES += \
     includes/basededonnees.cpp \
     widget/widgetprestations.cpp \
     includes/prestations.cpp \
-    includes/prestationscategories.cpp
+    includes/prestationscategories.cpp \
+    includes/clientscivilites.cpp
 
 HEADERS += \
     fenetreprincipale.h \
@@ -18,7 +19,8 @@ HEADERS += \
     includes/basededonnees.h \
     widget/widgetprestations.h \
     includes/prestations.h \
-    includes/prestationscategories.h
+    includes/prestationscategories.h \
+    includes/clientscivilites.h
 
 QT_DEBUG_PLUGINS=1
 

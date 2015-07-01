@@ -44,7 +44,10 @@ void WidgetPrestations::creerToolBar()
 {
     toolBar = new QToolBar;
 
+    QLabel *categorie = new QLabel("Catégorie : ");
     cbbPrestaCategories = new QComboBox;
+
+    toolBar->addWidget(categorie);
     toolBar->addWidget(cbbPrestaCategories);
 
     toolBar->addSeparator();
@@ -88,6 +91,8 @@ void WidgetPrestations::creerCategories()
     cbbPrestaCategories->setModel(prestaCategories->model(this, baseDeDonnees));
     cbbPrestaCategories->setModelColumn(1);
     cbbPrestaCategories->setCurrentIndex(0);
+
+    connect(cbbPrestaCategories, SIGNAL(currentIndexChanged(int)), this, SLOT(prestaCatChange(int)));
 }
 
 void WidgetPrestations::creerTableau()
@@ -157,7 +162,7 @@ void WidgetPrestations::sauvPrestation()
         record.setValue(0, QVariant(idPresta));
 
         record.setValue(1, QVariant(editNom->displayText()));
-        record.setValue(2, QVariant(cbbPrestaCategories->currentIndex()));
+        record.setValue(2, QVariant(prestaCategories->getDonnee(cbbPrestaCategories->currentIndex(), 0).toInt()));
         record.setValue(3, QVariant(editDesc->toPlainText()));
         record.setValue(4, QVariant(editPrix->value()));
 
@@ -256,3 +261,9 @@ void WidgetPrestations::desactiverForm(const bool ok)
 
 }
 
+void WidgetPrestations::prestaCatChange(int indexId)
+{
+    prestations->filtreCat(prestaCategories->getDonnee(indexId, 0).toInt());
+    viderFormulaire();
+    desactiverForm(true);
+}

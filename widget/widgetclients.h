@@ -3,6 +3,7 @@
 
 #include <QtWidgets>
 #include "includes/basededonnees.h"
+#include "includes/clientscivilites.h"
 #include "fenetreeditionclient.h"
 
 class WidgetClients : QWidget
@@ -18,17 +19,21 @@ private:
     void creerTableau();
     void creerActions();
     void creerToolBar();
+    void creerCivilites();
 
 private slots:
     void editerClient();
     void ajouterClient();
     void supprClient();
+    void clientsCivChange(int indexId);
 
 private:
     QMainWindow *parent;
     BaseDeDonnees *baseDeDonnees;
     QWidget *widget;
     QToolBar *toolBar;
+    ClientsCivilites *clientsCivilites;
+    QComboBox *cbbCivilites;
     QTreeView *tableau;
     QAction *actionEditerClient;
     QAction *actionAjouterClient;

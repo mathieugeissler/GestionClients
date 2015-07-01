@@ -33,6 +33,7 @@ private slots:
     void ajouterPrestation();
     void sauvPrestation();
     void supprPrestation();
+    void prestaCatChange(int indexId);
 
 private:
     QMainWindow *parent;
