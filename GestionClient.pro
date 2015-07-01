@@ -23,6 +23,8 @@ HEADERS += \
 QT_DEBUG_PLUGINS=1
 
 RESOURCES += \
-    ressources.qrc
+    ressources.qrc \
 
 FORMS +=
+
+DISTFILES +=

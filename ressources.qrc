@@ -1,0 +1,15 @@
+<RCC>
+    <qresource prefix="/">
+        <file>ressources/supprimer-un-utilisateur.ico</file>
+        <file>ressources/utilisateur-dajouter.ico</file>
+        <file>ressources/utilisateur-dediter.ico</file>
+        <file>ressources/exit.ico</file>
+        <file>ressources/utilisateurs-icone.png</file>
+        <file>ressources/notes-icone.png</file>
+        <file>ressources/outils-icone.png</file>
+        <file>ressources/parametres-icone.png</file>
+        <file>ressources/enregistrer-page-icone.png</file>
+        <file>ressources/page-ajouter-icone.png</file>
+        <file>ressources/supprimer-la-page-icone.png</file>
+    </qresource>
+</RCC>
