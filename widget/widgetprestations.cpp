@@ -17,6 +17,7 @@ WidgetPrestations::WidgetPrestations(QMainWindow *parent, BaseDeDonnees *bdd) : 
     layoutVer->addWidget(groupBox);
     layoutVer->addWidget(tableau);
 
+    //défini une ligne négative = aucune ligne selectionnée
     rowId = -1;
 }
 

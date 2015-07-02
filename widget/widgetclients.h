@@ -20,6 +20,7 @@ private:
     void creerActions();
     void creerToolBar();
     void creerCivilites();
+    void creerLayout();
 
 private slots:
     void editerClient();
@@ -38,6 +39,18 @@ private:
     QAction *actionEditerClient;
     QAction *actionAjouterClient;
     QAction *actionSupprClient;
+    QGroupBox *groupBox;
+    QLineEdit *editNom;
+    QComboBox *editCiv;
+    QLineEdit *editPrenom;
+    QLineEdit *editAdresse;
+    QLineEdit *editCP;
+    QLineEdit *editVille;
+    QLineEdit *editTel1;
+    QLineEdit *editTel2;
+    QLineEdit *editMail;
+    QLineEdit *editSiteWeb;
+    QTextEdit *editDesc;
 };
 
 #endif // WIDGETCLIENTS_H
