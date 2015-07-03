@@ -4,7 +4,6 @@ QT += sql
 SOURCES += \
     main.cpp \
     fenetreprincipale.cpp \
-    fenetreeditionclient.cpp \
     widget/widgetclients.cpp \
     includes/basededonnees.cpp \
     widget/widgetprestations.cpp \
@@ -15,7 +14,6 @@ SOURCES += \
 
 HEADERS += \
     fenetreprincipale.h \
-    fenetreeditionclient.h \
     widget/widgetclients.h \
     includes/basededonnees.h \
     widget/widgetprestations.h \
