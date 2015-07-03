@@ -69,7 +69,6 @@ void WidgetPrestations::creerLayoutPresta()
     editNom = new QLineEdit;
     editDesc = new QTextEdit;
 
-    editNom->setFixedWidth(400);
     groupBox->setFixedHeight(120);
     editPrix->setFixedWidth(100);
     editPrix->setRange(0.0,9999.99);
@@ -110,10 +109,15 @@ void WidgetPrestations::creerTableau()
     tableau->setColumnHidden(2, true);
     tableau->setEditTriggers(false);
 
-    connect(tableau->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(idPrestaChange(QItemSelection, QItemSelection)));
+    for(int i = 0; i < 4; i++)
+    {
+        tableau->resizeColumnToContents(i);
+    }
+
+    connect(tableau->selectionModel(), SIGNAL(selectionChanged(QItemSelection,QItemSelection)), this, SLOT(idChange(QItemSelection, QItemSelection)));
 }
 
-void WidgetPrestations::idPrestaChange(QItemSelection nvId, QItemSelection ancienId)
+void WidgetPrestations::idChange(QItemSelection nvId, QItemSelection ancienId)
 {
     if(nvId != ancienId)
     {
@@ -159,7 +163,6 @@ void WidgetPrestations::sauvPrestation()
     {
         QSqlRecord record = prestations->modelRecord();
 
-
         record.setValue(0, QVariant(idPresta));
 
         record.setValue(1, QVariant(editNom->displayText()));
@@ -172,6 +175,10 @@ void WidgetPrestations::sauvPrestation()
             QMessageBox::information(this, "Sauvegarde de la préstation", "la préstation " + editNom->displayText() + " est sauvegardée");
             viderFormulaire();
             desactiverForm(true);
+            for(int i = 0; i < 4; i++)
+            {
+                tableau->resizeColumnToContents(i);
+            }
         }
         else
         {

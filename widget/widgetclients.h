@@ -4,7 +4,7 @@
 #include <QtWidgets>
 #include "includes/basededonnees.h"
 #include "includes/clientscivilites.h"
-#include "fenetreeditionclient.h"
+#include "includes/clients.h"
 
 class WidgetClients : QWidget
 {   
@@ -21,25 +21,35 @@ private:
     void creerToolBar();
     void creerCivilites();
     void creerLayout();
+    void viderFormulaire();
+    bool ligneEstSelectionnee();
+    void desactiverForm(const bool ok);
+    void nvIdClient();
+    bool verifForm();
+    void chargerForm();
 
 private slots:
-    void editerClient();
+    void sauvClient();
     void ajouterClient();
     void supprClient();
     void clientsCivChange(int indexId);
+    void idChange(QItemSelection nvId, QItemSelection ancienId);
+    void entiteChange(int);
 
 private:
     QMainWindow *parent;
     BaseDeDonnees *baseDeDonnees;
     QWidget *widget;
     QToolBar *toolBar;
+    Clients *clients;
     ClientsCivilites *clientsCivilites;
     QComboBox *cbbCivilites;
     QTreeView *tableau;
-    QAction *actionEditerClient;
+    QAction *actionSauvClient;
     QAction *actionAjouterClient;
     QAction *actionSupprClient;
     QGroupBox *groupBox;
+    QCheckBox *editEntite;
     QLineEdit *editNom;
     QComboBox *editCiv;
     QLineEdit *editPrenom;
@@ -51,6 +61,9 @@ private:
     QLineEdit *editMail;
     QLineEdit *editSiteWeb;
     QTextEdit *editDesc;
+    QLineEdit *editSiret;
+    int rowId;
+    int idClient;
 };
 
 #endif // WIDGETCLIENTS_H

@@ -29,7 +29,7 @@ private:
     void desactiverForm(const bool ok);
 
 private slots:
-    void idPrestaChange(QItemSelection nvId, QItemSelection ancienId);
+    void idChange(QItemSelection nvId, QItemSelection ancienId);
     void ajouterPrestation();
     void sauvPrestation();
     void supprPrestation();
