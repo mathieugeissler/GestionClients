@@ -11,5 +11,10 @@
         <file>ressources/enregistrer-page-icone.png</file>
         <file>ressources/page-ajouter-icone.png</file>
         <file>ressources/supprimer-la-page-icone.png</file>
+        <file>ressources/ajouter-un-dossier-icone.png</file>
+        <file>ressources/dossier-icone.png</file>
+        <file>ressources/dossier-supprimer-icone.png</file>
+        <file>ressources/dossier-verifie-icone.png</file>
+        <file>ressources/supprimer-dossier-icone.png</file>
     </qresource>
 </RCC>

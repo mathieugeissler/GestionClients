@@ -4,6 +4,7 @@
 #include "includes/basededonnees.h"
 #include "widget/widgetclients.h"
 #include "widget/widgetprestations.h"
+#include "widget/widgetprojets.h"
 #include <QtWidgets>
 #include <QString>
 
@@ -33,6 +34,7 @@ private:
     BaseDeDonnees *bdd;
     WidgetClients *affWidgetClients;
     WidgetPrestations *affWidgetPrestations;
+    WidgetProjets *affWidgetProjets;
 };
 
 #endif // FENETREPRINCIPALE

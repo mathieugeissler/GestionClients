@@ -13,7 +13,6 @@ class WidgetClients : QWidget
 public:
     WidgetClients(QMainWindow *parent, BaseDeDonnees *bdd);
     void ouvrir();
-    void fermer();
 
 private:
     void creerTableau();

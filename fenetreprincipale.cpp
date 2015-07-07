@@ -105,6 +105,11 @@ void FenetrePrincipale::changerWidget(QListWidgetItem *nvItem, QListWidgetItem *
             affWidgetPrestations = new WidgetPrestations(this, bdd);
             affWidgetPrestations->ouvrir();
         }
+        if(nvItem->text() == "Projets")
+        {
+            affWidgetProjets = new WidgetProjets(this, bdd);
+            affWidgetProjets->ouvrir();
+        }
     }
 }
 
