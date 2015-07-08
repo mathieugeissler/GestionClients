@@ -6,19 +6,27 @@
 
 class WidgetProjets : public QWidget
 {
+    Q_OBJECT
+
 public:
     WidgetProjets(QMainWindow *parent, BaseDeDonnees *bdd);
-    void ouvrir();
+    QWidget *ouvrir();
+
 private :
     void creerToolBar();
     void creerAction();
     void creerOnglets();
     void creerTableau();
 
+    QWidget *ajouterNvlOnglet(const bool nvProjet, const int idProjet = 0);
+
+private slots :
+    void ajouterProjet();
+
 private:
     QMainWindow *parent;
     BaseDeDonnees *baseDeDonnees;
-    QWidget *widget;
+    QWidget *widgetProjets;
     QAction *actionOuvrirProjet;
     QAction *actionFermerTous;
     QAction *actionAjouterProjet;

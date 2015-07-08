@@ -20,14 +20,16 @@ private:
     void creerMenus();
     void creerToolBar();
     void creerListWidget();
+    void creerStackedLayout();
     void fermerWidget(QListWidgetItem *ancienItem);
 
 private slots:
     void verifCoBdd();
-    void changerWidget(QListWidgetItem *nvItem, QListWidgetItem *ancienItem);
 
 private:
     QDockWidget *dockWidget;
+    QWidget *widgetCentral;
+    QStackedLayout *stackedLayout;
     QListWidget *listWidget;
     QAction *actionQuitter;
     QAction *actionTestCoBdd;

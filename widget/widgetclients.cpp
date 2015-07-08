@@ -10,8 +10,8 @@ WidgetClients::WidgetClients(QMainWindow *parent, BaseDeDonnees *bdd) : parent(p
     creerLayout();
     creerTableau();  
 
-    widget = new QWidget();
-    widget->setLayout(layoutVer);
+    widgetClients = new QWidget();
+    widgetClients->setLayout(layoutVer);
 
     layoutVer->addWidget(toolBar);
     layoutVer->addWidget(groupBox);
@@ -20,9 +20,9 @@ WidgetClients::WidgetClients(QMainWindow *parent, BaseDeDonnees *bdd) : parent(p
     rowId = -1;
 }
 
-void WidgetClients::ouvrir()
+QWidget * WidgetClients::ouvrir()
 {
-    parent->setCentralWidget(widget);
+   return widgetClients;
 }
 
 void WidgetClients::creerActions()

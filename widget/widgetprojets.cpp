@@ -8,15 +8,15 @@ WidgetProjets::WidgetProjets(QMainWindow *parent, BaseDeDonnees *bdd) : parent(p
     creerToolBar();
     creerOnglets();
 
-    widget = new QWidget();
-    widget->setLayout(layoutVer);
+    widgetProjets = new QWidget();
+    widgetProjets->setLayout(layoutVer);
 
     layoutVer->addWidget(onglets);
 }
 
-void WidgetProjets::ouvrir()
+QWidget *WidgetProjets::ouvrir()
 {
-    parent->setCentralWidget(widget);
+    return widgetProjets;
 }
 
 void WidgetProjets::creerAction()
@@ -29,6 +29,7 @@ void WidgetProjets::creerAction()
 
     actionAjouterProjet = new QAction("Créer un nouveau projet", this);
     actionAjouterProjet->setIcon(QIcon(QPixmap(":/ressources/ajouter-un-dossier-icone.png")));
+    connect(actionAjouterProjet, SIGNAL(triggered(bool)), this, SLOT(ajouterProjet()));
 
     actionSauvTous = new QAction("Sauvegarder tous les projets ouverts", this);
     actionSauvTous->setIcon(QIcon(QPixmap(":/ressources/dossier-verifie-icone.png")));
@@ -77,4 +78,22 @@ void WidgetProjets::creerTableau()
     tableau->setSelectionMode(QAbstractItemView::SingleSelection);
     tableau->setSelectionBehavior(QAbstractItemView::SelectRows);
     tableau->setEditTriggers(false);
+}
+
+void WidgetProjets::ajouterProjet()
+{
+    onglets->addTab(ajouterNvlOnglet(true), "Nouveau projet");
+    onglets->setCurrentIndex(onglets->count()-1);
+}
+
+QWidget *WidgetProjets::ajouterNvlOnglet(const bool nvProjet, const int idProjet)
+{
+    QWidget *ongletProjet = new QWidget;
+    QVBoxLayout *layoutVer = new QVBoxLayout;
+    ongletProjet->setLayout(layoutVer);
+    /*if(nvProjet)
+    {
+
+    }*/
+    return ongletProjet;
 }

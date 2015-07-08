@@ -13,7 +13,7 @@ class WidgetPrestations : public QWidget
 
 public:
     WidgetPrestations(QMainWindow *parent, BaseDeDonnees *baseDeDonnees);
-    void ouvrir();
+    QWidget *ouvrir();
 
 private:
     void creerTableau();
@@ -42,7 +42,7 @@ private:
     PrestationsCategories *prestaCategories;
     int idPresta;
     int rowId;
-    QWidget *widget;
+    QWidget *widgetPresta;
     QToolBar *toolBar;
     QTreeView *tableau;
     QAction *actionAjouterPrestation;

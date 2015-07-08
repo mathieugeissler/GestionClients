@@ -9,11 +9,19 @@ FenetrePrincipale::FenetrePrincipale()
     creerActions();
     creerMenus();
     creerToolBar();
+    creerStackedLayout();
     creerListWidget();
 
     //Options de la fenêtre
     setMinimumSize(1000,700);
     setWindowTitle(tr("Gestion Clients"));
+
+    //Widget central
+    widgetCentral = new QWidget;
+    setCentralWidget(widgetCentral);
+    QVBoxLayout *layoutCentral = new QVBoxLayout;
+    layoutCentral->addLayout(stackedLayout);
+    widgetCentral->setLayout(layoutCentral);
 }
 
 void FenetrePrincipale::creerActions()
@@ -40,6 +48,20 @@ void FenetrePrincipale::creerMenus()
 void FenetrePrincipale::creerToolBar()
 {
 
+}
+
+void FenetrePrincipale::creerStackedLayout()
+{
+    stackedLayout = new QStackedLayout;
+
+    affWidgetClients = new WidgetClients(this, bdd);
+    stackedLayout->addWidget(affWidgetClients->ouvrir());
+
+    affWidgetPrestations = new WidgetPrestations(this, bdd);
+    stackedLayout->addWidget(affWidgetPrestations->ouvrir());
+
+    affWidgetProjets = new WidgetProjets(this, bdd);
+    stackedLayout->addWidget(affWidgetProjets->ouvrir());
 }
 
 void FenetrePrincipale::creerListWidget()
@@ -85,32 +107,7 @@ void FenetrePrincipale::creerListWidget()
     dockWidget->setWidget(listWidget);
     addDockWidget(Qt::LeftDockWidgetArea, dockWidget);
 
-    connect(listWidget, SIGNAL(currentItemChanged(QListWidgetItem*, QListWidgetItem*)), this, SLOT(changerWidget(QListWidgetItem*, QListWidgetItem*)));
-}
-
-void FenetrePrincipale::changerWidget(QListWidgetItem *nvItem, QListWidgetItem *ancienItem)
-{
-    if(nvItem != ancienItem)
-    {
-        qDebug() << nvItem;
-        qDebug() << listWidget->currentItem()->text();
-
-        if(nvItem->text() == "Clients")
-        {
-            affWidgetClients = new WidgetClients(this, bdd);
-            affWidgetClients->ouvrir();
-        }
-        if(nvItem->text() == "Préstations")
-        {
-            affWidgetPrestations = new WidgetPrestations(this, bdd);
-            affWidgetPrestations->ouvrir();
-        }
-        if(nvItem->text() == "Projets")
-        {
-            affWidgetProjets = new WidgetProjets(this, bdd);
-            affWidgetProjets->ouvrir();
-        }
-    }
+    connect(listWidget, SIGNAL(currentRowChanged(int)), stackedLayout, SLOT(setCurrentIndex(int)));
 }
 
 void FenetrePrincipale::verifCoBdd()

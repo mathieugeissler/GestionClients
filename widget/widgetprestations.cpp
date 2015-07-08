@@ -10,8 +10,8 @@ WidgetPrestations::WidgetPrestations(QMainWindow *parent, BaseDeDonnees *bdd) : 
     creerCategories();
     creerTableau();
 
-    widget = new QWidget();
-    widget->setLayout(layoutVer);
+    widgetPresta = new QWidget();
+    widgetPresta->setLayout(layoutVer);
 
     layoutVer->addWidget(toolBar);
     layoutVer->addWidget(groupBox);
@@ -21,9 +21,9 @@ WidgetPrestations::WidgetPrestations(QMainWindow *parent, BaseDeDonnees *bdd) : 
     rowId = -1;
 }
 
-void WidgetPrestations::ouvrir()
+QWidget *WidgetPrestations::ouvrir()
 {
-    parent->setCentralWidget(widget);
+    return widgetPresta;
 }
 
 void WidgetPrestations::creerActions()

@@ -12,7 +12,7 @@ class WidgetClients : QWidget
 
 public:
     WidgetClients(QMainWindow *parent, BaseDeDonnees *bdd);
-    void ouvrir();
+    QWidget *ouvrir();
 
 private:
     void creerTableau();
@@ -38,7 +38,7 @@ private slots:
 private:
     QMainWindow *parent;
     BaseDeDonnees *baseDeDonnees;
-    QWidget *widget;
+    QWidget *widgetClients;
     QToolBar *toolBar;
     Clients *clients;
     ClientsCivilites *clientsCivilites;
