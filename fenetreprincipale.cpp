@@ -102,7 +102,7 @@ void FenetrePrincipale::creerListWidget()
     listWidget->addItem(listWidgetParametres);
 
 
-    dockWidget = new QDockWidget("Menu Principale", this);
+    dockWidget = new QDockWidget("Menu Principal", this);
     dockWidget->setFeatures(QDockWidget::NoDockWidgetFeatures);
     dockWidget->setWidget(listWidget);
     addDockWidget(Qt::LeftDockWidgetArea, dockWidget);

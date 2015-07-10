@@ -70,7 +70,8 @@ void WidgetProjets::creerOnglets()
 void WidgetProjets::creerTableau()
 {
     tableau = new QTreeView;
-    //tableau->setModel(prestations->model(this, baseDeDonnees));
+    projets = new Projets;
+    tableau->setModel(projets->model(this, baseDeDonnees));
     tableau->setRootIsDecorated(false);
     tableau->setAlternatingRowColors(true);
     tableau->setSortingEnabled(true);
@@ -82,18 +83,9 @@ void WidgetProjets::creerTableau()
 
 void WidgetProjets::ajouterProjet()
 {
-    onglets->addTab(ajouterNvlOnglet(true), "Nouveau projet");
+    Onglets *nvOnglet = new Onglets(baseDeDonnees, true, 0);
+    onglets->addTab(nvOnglet->ouvrir(), "Nouveau Projet");
     onglets->setCurrentIndex(onglets->count()-1);
 }
 
-QWidget *WidgetProjets::ajouterNvlOnglet(const bool nvProjet, const int idProjet)
-{
-    QWidget *ongletProjet = new QWidget;
-    QVBoxLayout *layoutVer = new QVBoxLayout;
-    ongletProjet->setLayout(layoutVer);
-    /*if(nvProjet)
-    {
 
-    }*/
-    return ongletProjet;
-}

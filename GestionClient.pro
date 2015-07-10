@@ -11,7 +11,9 @@ SOURCES += \
     includes/prestationscategories.cpp \
     includes/clientscivilites.cpp \
     includes/clients.cpp \
-    widget/widgetprojets.cpp
+    widget/widgetprojets.cpp \
+    includes/projets.cpp \
+    widget/onglets.cpp
 
 HEADERS += \
     fenetreprincipale.h \
@@ -22,7 +24,9 @@ HEADERS += \
     includes/prestationscategories.h \
     includes/clientscivilites.h \
     includes/clients.h \
-    widget/widgetprojets.h
+    widget/widgetprojets.h \
+    includes/projets.h \
+    widget/onglets.h
 
 QT_DEBUG_PLUGINS=1
 

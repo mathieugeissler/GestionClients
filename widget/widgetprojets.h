@@ -3,6 +3,9 @@
 
 #include <QtWidgets>
 #include "includes/basededonnees.h"
+#include "includes/projets.h"
+#include "widget/onglets.h"
+
 
 class WidgetProjets : public QWidget
 {
@@ -17,8 +20,6 @@ private :
     void creerAction();
     void creerOnglets();
     void creerTableau();
-
-    QWidget *ajouterNvlOnglet(const bool nvProjet, const int idProjet = 0);
 
 private slots :
     void ajouterProjet();
@@ -36,6 +37,7 @@ private:
     QTabWidget *onglets;
     QWidget *ongletPrincipal;
     QTreeView *tableau;
+    Projets *projets;
 };
 
 #endif // WIDGETPROJETS_H
