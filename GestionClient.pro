@@ -13,7 +13,8 @@ SOURCES += \
     includes/clients.cpp \
     widget/widgetprojets.cpp \
     includes/projets.cpp \
-    widget/onglets.cpp
+    widget/onglets.cpp \
+    includes/spinboxdelegate.cpp
 
 HEADERS += \
     fenetreprincipale.h \
@@ -26,7 +27,8 @@ HEADERS += \
     includes/clients.h \
     widget/widgetprojets.h \
     includes/projets.h \
-    widget/onglets.h
+    widget/onglets.h \
+    includes/spinboxdelegate.h
 
 QT_DEBUG_PLUGINS=1
 

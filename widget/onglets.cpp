@@ -1,6 +1,6 @@
 #include "onglets.h"
 
-Onglets::Onglets(BaseDeDonnees *bdd, bool nvProjet, int idProjet = 0) : baseDeDonnees(bdd)
+Onglets::Onglets(BaseDeDonnees *bdd, bool nvProjet, int id = 0) : baseDeDonnees(bdd), idProjet(id)
 {
     layoutPrincipal = new QVBoxLayout;
     this->setLayout(layoutPrincipal);
@@ -77,6 +77,7 @@ void Onglets::creerSelPresta()
 
     //Ajouter
     QPushButton *prestaPbAjouter = new QPushButton("Ajouter");
+    connect(prestaPbAjouter, SIGNAL(clicked(bool)), this, SLOT(ajouterPresta()));
 
     prestaLayoutHor->addWidget(prestaLblCat);
     prestaLayoutHor->addWidget(prestaCbbCat);
@@ -85,15 +86,24 @@ void Onglets::creerSelPresta()
     prestaLayoutHor->addWidget(prestaPbAjouter);
 
     //tableau
-    QTableView *prestaTableau = new QTableView;
-    QSqlTableModel *tableModel = new QSqlTableModel;
-    tableModel->setHeaderData(0, Qt::Horizontal, "Numéro");
-    tableModel->setHeaderData(1, Qt::Horizontal, "Préstation");
-    tableModel->setHeaderData(2, Qt::Horizontal, "Prix unit. HT");
-    tableModel->setHeaderData(3, Qt::Horizontal, "Quantitée");
-    tableModel->setHeaderData(4, Qt::Horizontal, "Prix Total");
-    tableModel->setHeaderData(5, Qt::Horizontal, "Suppr");
-    prestaTableau->setModel(tableModel);
+    prestaTableau = new QTableWidget;
+    prestaTableau->setAlternatingRowColors(true);
+    prestaTableau->verticalHeader()->hide();
+    prestaTableau->setSelectionMode(QAbstractItemView::SingleSelection);
+    prestaTableau->setSelectionBehavior(QAbstractItemView::SelectRows);
+    for(int i = 0; i < 6; i++)
+    {
+        prestaTableau->insertColumn(i);
+    }
+    prestaTableau->setHorizontalHeaderItem(0, new QTableWidgetItem("Id"));
+    prestaTableau->setHorizontalHeaderItem(1, new QTableWidgetItem("Nom"));
+    prestaTableau->setHorizontalHeaderItem(2, new QTableWidgetItem("Prix unitaire"));
+    prestaTableau->setHorizontalHeaderItem(3, new QTableWidgetItem("Quantité"));
+    prestaTableau->setHorizontalHeaderItem(4, new QTableWidgetItem("Prix total"));
+    prestaTableau->setHorizontalHeaderItem(5, new QTableWidgetItem("Supprimer"));
+
+    prestaTableau->setItemDelegateForColumn(3, new SpinBoxDelegate(prestaTableau));
+    connect(prestaTableau->itemDelegateForColumn(3), SIGNAL(commitData(QWidget*)), this, SLOT(quantiteChange(QWidget *)));
 
     prestaLayoutVer->addLayout(prestaLayoutHor);
     prestaLayoutVer->addWidget(prestaTableau);
@@ -115,4 +125,59 @@ void Onglets::creerLayout()
     layoutPrincipal->addWidget(clientGroupBox);
     layoutPrincipal->addWidget(prestaGroupBox);
     layoutPrincipal->addWidget(totalGroupBox);
+}
+
+void Onglets::ajouterPresta()
+{
+    int idPresta = prestaCbbNom->currentIndex();
+
+    prestaTableau->insertRow(prestaTableau->rowCount());
+    int row = prestaTableau->rowCount()-1;
+
+    QTableWidgetItem *itemIdPresta = new QTableWidgetItem(QString("%1").arg(idPresta));
+    prestaTableau->setItem(row, 0, itemIdPresta);
+
+    QTableWidgetItem *itemNom = new QTableWidgetItem(tr("%1").arg(prestations->getDonnees(idPresta, 1)));
+    prestaTableau->setItem(row, 1, itemNom);
+
+    QTableWidgetItem *itemPrixUnit = new QTableWidgetItem(tr("%1").arg(prestations->getDonnees(idPresta, 4)));
+    prestaTableau->setItem(row, 2, itemPrixUnit);
+
+    QTableWidgetItem *itemPrixTotal = new QTableWidgetItem(tr("%1").arg(prestations->getDonnees(idPresta, 4)));
+    prestaTableau->setItem(row, 4, itemPrixTotal);
+
+    QPushButton *supprimer = new QPushButton("Supprimer", prestaTableau);
+    prestaTableau->setCellWidget(row, 5, supprimer);
+    connect(supprimer, SIGNAL(clicked(bool)), this, SLOT(prestaSuppr()));
+}
+
+void Onglets::quantiteChange(QWidget *widget)
+{
+    int value = prestaTableau->itemAt(widget->pos())->data(Qt::DisplayRole).toInt();
+    int row = widget->pos().y();
+    if(row != 0)
+    {
+        row = row / 30;
+    }
+    double prix = prestaTableau->item(row, 2)->data(Qt::DisplayRole).toDouble();
+
+    prestaTableau->item(row, 4)->setData(Qt::DisplayRole, QVariant(value * prix));
+}
+
+void Onglets::prestaSuppr()
+{
+    int row = prestaTableau->currentRow();
+
+    if(row < 0)
+    {
+        QMessageBox::warning(this, "Erreur", "Selectionner la ligne à supprimer");
+    }
+    else
+    {
+        int rep = QMessageBox::warning(this, "Suppression d'une prestation", "Supprimer la préstation ?", QMessageBox::Yes, QMessageBox::No);
+        if (rep == QMessageBox::Yes)
+        {
+            prestaTableau->removeRow(row);
+        }
+    }
 }
